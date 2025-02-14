@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 30%;
+            margin: 100px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        .form-wrapper {
+            display: flex;
+            width: 200%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .form-container {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .toggle-buttons button {
+            margin: 5px;
+            background-color: gray;
+        }
+        .toggle-buttons button.active {
+            background-color: blue;
+        }
+    </style>
+    <script>
+        function toggleForm(type) {
+            const formWrapper = document.querySelector('.form-wrapper');
+            if (type === 'admin') {
+                formWrapper.style.transform = 'translateX(-50%)';
+            } else {
+                formWrapper.style.transform = 'translateX(0)';
+            }
+            document.querySelectorAll('.toggle-buttons button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(type).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="toggle-buttons">
+            <button id="user" class="active" onclick="toggleForm('user')">User Login</button>
+            <button id="admin" onclick="toggleForm('admin')">Admin Login</button>
+        </div>
+        <div class="form-wrapper">
+            <div class="form-container">
+                <h2>User Login</h2>
+                <form id="user_login_form">
+                    <input type="text" name="username" placeholder="Username" required id="user_username">
+                    <input type="password" name="password" placeholder="Password" required id="user_password">
+                    <button type="submit">Login</button>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </form>
+            </div>
+            <div class="form-container">
+                <h2>Admin Login</h2>
+                <form id="admin_login_form">
+                    <input type="text" name="admin_username" placeholder="Admin Username" required id="admin_username">
+                    <input type="password" name="admin_password" placeholder="Admin Password" required id="admin_password">
+                    <button type="submit">Login</button>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        let userform = document.getElementById("user_login_form");
+        let adminform = document.getElementById("admin_login_form");
+
+        userform.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            let username = document.getElementById("user_username").value;
+            let password = document.getElementById("user_password").value;
+            let dataobj = {
+                username: username,
+                password: password
+            }
+            console.log(dataobj);
+            
+            try{
+                let url = 'http://localhost:8000/form/api/Userlogin?username='+username+'&password='+password;
+                window.location.href = url
+            }catch(err){
+                console.log(err);
+                alert('There was an error occured while login the form');
+            }
+        });
+
+        adminform.addEventListener("submit" , async (e) => {
+            e.preventDefault();
+            if(admin_username.value === 'admin' && admin_password.value === 'admin'){
+                window.location.href = 'admin.html';
+            }else{
+                alert('Invalid Admin Credentials');
+            }
+        })
+    </script>
+</body>
+</html>

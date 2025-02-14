@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+        .dashboard {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .logout {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout button {
+            padding: 10px 20px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .logout button:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <h2>User Information Dashboard</h2>
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Details</th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td id="User_name">John Doe</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td id="User_phone">+1234567890</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td id="User_email">johndoe@example.com</td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td id="User_username">johndoe</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td id="User_password">********</td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td id="User_msg">Welcome to the dashboard!</td>
+        </tr>
+    </table>
+    <div class="logout">
+        <button onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<script>
+    async function data() {
+        
+    }
+</script>
+
+</body>
+</html>

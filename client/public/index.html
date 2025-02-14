@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .navbar {
+            background: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div><a href="#">Home</a></div>
+        <div><a href="login.html">Login</a></div>
+    </div>
+    <div class="container">
+        <h2>Contact Us</h2>
+        <form id="form">
+            <input type="text" name="name" placeholder="Name" required id="Client_name">
+            <input type="text" name="username" placeholder="Username" required id="Client_username">
+            <input type="password" name="password" placeholder="Password" required id="Client_password">
+            <input type="tel" name="phone" placeholder="Phone" required id="Client_phone">
+            <input type="email" name="email" placeholder="Email" required id="Client_email">
+            <textarea name="msg" placeholder="Message" rows="5" required id="Client_msg"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        let form = document.getElementById("form")
+
+        form.addEventListener("submit", async (e)=>{
+            e.preventDefault()
+            const name = document.getElementById('Client_name').value;
+            const username= document.getElementById('Client_username').value;
+            const password = document.getElementById('Client_password').value;
+            const phone = document.getElementById('Client_phone').value;
+            const email = document.getElementById('Client_email').value;
+            const message = document.getElementById('Client_msg').value;
+
+            const formData = {
+                name : name,
+                username: username,
+                password: password,
+                phone: phone,
+                email: email,
+                msg: message
+            }
+
+            try{
+                let response = await fetch('http://localhost:8000/form/api/post' , {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+
+                let data = await response.json();
+                if(data.status === 1){
+                    alert('Form submitted succesfully')
+                }
+                else{
+                    alert('There was an error in any of the entries')
+                }
+            }catch (error){
+                console.log("Error :" , error)
+                alert('There was an error ocuured while submitting the form');
+            }
+        })
+    </script>
+</body>
+</html>
